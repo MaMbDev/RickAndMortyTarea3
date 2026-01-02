@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph_main"
+    app:startDestination="@id/episodesFragment">
+
+    <fragment
+        android:id="@+id/episodesFragment"
+        android:name="dam.pmdm.rickandmortytarea3.EpisodesFragment"
+        android:label="Episodios" />
+
+    <fragment
+        android:id="@+id/statsFragment"
+        android:name="dam.pmdm.rickandmortytarea3.StatsFragment"
+        android:label="Estadísticas" />
+
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="dam.pmdm.rickandmortytarea3.SettingsFragment"
+        android:label="Ajustes" />
+</navigation>
