@@ -1,6 +1,7 @@
 package dam.pmdm.rickandmortytarea3
 
 import android.os.Bundle
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
@@ -39,6 +40,32 @@ class MainActivity : AppCompatActivity() {
 
         setupActionBarWithNavController(navController, appBarConfiguration)
         navigationView.setupWithNavController(navController)
+
+        navigationView.setNavigationItemSelectedListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.episodesFragment,
+                R.id.statsFragment,
+                R.id.settingsFragment -> {
+                    navController.navigate(menuItem.itemId)
+                    drawerLayout.closeDrawers()
+                    true
+                }
+                R.id.nav_about -> {
+                    showAboutDialog()
+                    drawerLayout.closeDrawers()
+                    true
+                }
+                else -> false
+            }
+        }
+    }
+
+    private fun showAboutDialog() {
+        AlertDialog.Builder(this)
+            .setTitle("Acerca de")
+            .setMessage("Desarrollador: Miguel Ángel Marañón Buendía \nVersión: 1.0.0")
+            .setPositiveButton("Cerrar", null)
+            .show()
     }
 
     override fun onSupportNavigateUp(): Boolean {
