@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "974503415985",
+    "project_id": "rickandmortytarea3",
+    "storage_bucket": "rickandmortytarea3.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:974503415985:android:7fc46606c074457dbe9290",
+        "android_client_info": {
+          "package_name": "dam.pmdm.rickandmortytarea3"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAMnqqdhanMIhbD00UIoJbw0KZNaRIkzKs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
