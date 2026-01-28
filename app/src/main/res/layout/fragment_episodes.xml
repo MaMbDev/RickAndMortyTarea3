@@ -16,14 +16,14 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Todos" />
+            android:text="@string/all" />
 
         <Button
             android:id="@+id/btnFilterSeen"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Vistos" />
+            android:text="@string/seen" />
     </LinearLayout>
 
     <!-- Lista de episodios -->

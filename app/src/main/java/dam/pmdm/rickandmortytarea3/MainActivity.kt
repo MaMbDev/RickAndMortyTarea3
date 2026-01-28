@@ -20,8 +20,10 @@ import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import dam.pmdm.rickandmortytarea3.data.preferences.AppPreferences
+import dam.pmdm.rickandmortytarea3.utils.ThemeHelper
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
 
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var navController: NavController
@@ -34,19 +36,23 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        val appPreferences = AppPreferences(this)
+        ThemeHelper.applyTheme(appPreferences.theme)
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         auth = FirebaseAuth.getInstance()
 
-        // Verificar autenticación
+        // Verifica autenticación
         if (auth.currentUser == null) {
             startActivity(Intent(this, LoginActivity::class.java))
             finish()
             return
         }
 
-        // Asegurar que el documento del usuario existe en Firestore
+        // Asegura que el documento del usuario existe en Firestore
         ensureUserDocument()
 
         val toolbar: MaterialToolbar = findViewById(R.id.toolbar)
@@ -55,7 +61,7 @@ class MainActivity : AppCompatActivity() {
         drawerLayout = findViewById(R.id.drawerLayout)
         val navigationView: NavigationView = findViewById(R.id.navigationView)
 
-        // Actualizar email en el header
+        // Actualiza email en el header
         val headerView = navigationView.getHeaderView(0)
         val tvUserEmail = headerView.findViewById<TextView>(R.id.tvUserEmail)
         tvUserEmail.text = auth.currentUser?.email ?: "Usuario"
@@ -95,11 +101,9 @@ class MainActivity : AppCompatActivity() {
         val userId = auth.currentUser?.uid ?: return
         val userEmail = auth.currentUser?.email ?: "Usuario"
 
-        // Verificar si el documento existe
         db.collection("users").document(userId).get()
             .addOnSuccessListener { document ->
                 if (!document.exists()) {
-                    // Crear documento si no existe
                     val userData = hashMapOf(
                         "email" to userEmail,
                         "createdAt" to System.currentTimeMillis(),

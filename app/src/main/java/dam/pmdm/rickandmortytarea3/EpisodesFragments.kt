@@ -93,13 +93,13 @@ class EpisodesFragment : Fragment() {
     }
 
     private fun setupObservers() {
-        // Observar episodios
+        // Observa episodios
         viewModel.episodes.observe(viewLifecycleOwner) { episodes ->
             Log.d(TAG, "Episodios observados: ${episodes.size}")
             applyFilter(episodes)
         }
 
-        // Observar episodios vistos -
+        // Observa episodios vistos -
         viewModel.seenEpisodes.observe(viewLifecycleOwner) { seenIds ->
             Log.d(TAG, "Episodios vistos actualizados: ${seenIds.size}")
             Log.d(TAG, "Lista de vistos: $seenIds")
@@ -130,13 +130,13 @@ class EpisodesFragment : Fragment() {
         btnAll.setOnClickListener {
             showingSeenOnly = false
             viewModel.episodes.value?.let { applyFilter(it) }
-            Toast.makeText(requireContext(), "Mostrando todos los episodios", Toast.LENGTH_SHORT).show()
+            // Los textos vienen del strings.xml
         }
 
         btnSeen.setOnClickListener {
             showingSeenOnly = true
             viewModel.episodes.value?.let { applyFilter(it) }
-            Toast.makeText(requireContext(), "Mostrando solo episodios vistos", Toast.LENGTH_SHORT).show()
+            // Los textos vienen del strings.xml
         }
     }
 

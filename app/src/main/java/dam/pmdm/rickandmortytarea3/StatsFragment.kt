@@ -74,27 +74,18 @@ class StatsFragment : Fragment() {
     private fun updateStats(seenCount: Int) {
         val totalEpisodes = viewModel.episodes.value?.size ?: 0
 
-        binding.tvTotalEpisodes.text = "Total episodios: $totalEpisodes"
-        binding.tvSeenEpisodes.text = "Episodios vistos: $seenCount"
+        binding.tvTotalEpisodes.text = "${getString(R.string.total_episodes)}: $totalEpisodes"
+        binding.tvSeenEpisodes.text = "${getString(R.string.seen_episodes)}: $seenCount"
 
         if (totalEpisodes > 0) {
-            // Calcula porcentaje (de 0 a 100)
             val percentage = (seenCount.toFloat() / totalEpisodes * 100).toInt()
-
-            // Actualiza el texto del porcentaje en el centro
             binding.tvProgressPercentage.text = "$percentage%"
-
-            // Actualiza el progreso circular (0-100)
             binding.circularProgress.progress = percentage
-
-            // Actualiza mensaje según el progreso
             updateProgressMessage(percentage, seenCount, totalEpisodes)
-
-            Log.d(TAG, "Estadísticas actualizadas: $seenCount/$totalEpisodes ($percentage%)")
         } else {
             binding.tvProgressPercentage.text = "0%"
             binding.circularProgress.progress = 0
-            binding.tvProgressMessage.text = "Cargando datos..."
+            binding.tvProgressMessage.text = getString(R.string.loading_data)
         }
     }
 

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Rick and Morty</string>
+
+    <!-- Navegación -->
+    <string name="episodes">Episodes</string>
+    <string name="stats">Statistics</string>
+    <string name="settings">Settings</string>
+    <string name="about">About</string>
+    <string name="logout">Logout</string>
+
+    <!-- Botones filtros -->
+    <string name="all">All</string>
+    <string name="seen">Seen</string>
+
+    <!-- Estadísticas -->
+    <string name="total_episodes">Total episodes</string>
+    <string name="seen_episodes">Seen episodes</string>
+    <string name="progress">Progress</string>
+
+    <!-- Ajustes -->
+    <string name="language">Language</string>
+    <string name="theme">Theme</string>
+    <string name="session">Session</string>
+    <string name="select_language">Select application language</string>
+    <string name="select_theme">Select application theme</string>
+    <string name="close_session">Close your current session</string>
+    <string name="spanish">Spanish</string>
+    <string name="english">English</string>
+    <string name="light">Light</string>
+    <string name="dark">Dark</string>
+    <string name="system">System</string>
+    <string name="current_settings">Current settings</string>
+    <string name="changes_warning">Language and theme changes require restarting the app to fully apply.</string>
+    <string name="user">User</string>
+    <string name="loading_data">Loading data...</string>
+</resources>

@@ -114,7 +114,7 @@ class EpisodesViewModel(application: Application) : AndroidViewModel(application
         return Triple(total, seen, percentage)
     }
 
-    // Método para debugging
+    // Método para debugear
     fun debugSeenEpisodes() {
         Log.d(TAG, "=== DEBUG Seen Episodes ===")
         val seen = sharedPrefsRepo.getSeenEpisodes()

@@ -1,3 +1,36 @@
 <resources>
-    <string name="app_name">RickAndMortyTarea3</string>
+    <string name="app_name">Rick and Morty</string>
+
+    <!-- Navegación -->
+    <string name="episodes">Episodios</string>
+    <string name="stats">Estadísticas</string>
+    <string name="settings">Ajustes</string>
+    <string name="about">Acerca de</string>
+    <string name="logout">Cerrar Sesión</string>
+
+    <!-- Botones filtros -->
+    <string name="all">Todos</string>
+    <string name="seen">Vistos</string>
+
+    <!-- Estadísticas -->
+    <string name="total_episodes">Total episodios</string>
+    <string name="seen_episodes">Episodios vistos</string>
+    <string name="progress">Progreso</string>
+
+    <!-- Ajustes -->
+    <string name="language">Idioma</string>
+    <string name="theme">Tema</string>
+    <string name="session">Sesión</string>
+    <string name="select_language">Selecciona el idioma de la aplicación</string>
+    <string name="select_theme">Selecciona el tema visual de la aplicación</string>
+    <string name="close_session">Cierra tu sesión actual</string>
+    <string name="spanish">Español</string>
+    <string name="english">English</string>
+    <string name="light">Claro</string>
+    <string name="dark">Oscuro</string>
+    <string name="system">Sistema</string>
+    <string name="current_settings">Configuración actual</string>
+    <string name="changes_warning">Los cambios de idioma y tema requieren reiniciar la aplicación para aplicar completamente.</string>
+    <string name="user">Usuario</string>
+    <string name="loading_data">Cargando datos...</string>
 </resources>
