@@ -2,6 +2,7 @@ package dam.pmdm.rickandmortytarea3
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.TextView
@@ -17,6 +18,8 @@ import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 class MainActivity : AppCompatActivity() {
 
@@ -24,6 +27,11 @@ class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var auth: FirebaseAuth
+    private val db = Firebase.firestore
+
+    companion object {
+        private const val TAG = "MainActivity"
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,6 +45,9 @@ class MainActivity : AppCompatActivity() {
             finish()
             return
         }
+
+        // Asegurar que el documento del usuario existe en Firestore
+        ensureUserDocument()
 
         val toolbar: MaterialToolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
@@ -78,6 +89,38 @@ class MainActivity : AppCompatActivity() {
                 else -> false
             }
         }
+    }
+
+    private fun ensureUserDocument() {
+        val userId = auth.currentUser?.uid ?: return
+        val userEmail = auth.currentUser?.email ?: "Usuario"
+
+        // Verificar si el documento existe
+        db.collection("users").document(userId).get()
+            .addOnSuccessListener { document ->
+                if (!document.exists()) {
+                    // Crear documento si no existe
+                    val userData = hashMapOf(
+                        "email" to userEmail,
+                        "createdAt" to System.currentTimeMillis(),
+                        "viewedEpisodes" to emptyList<String>()
+                    )
+
+                    db.collection("users").document(userId)
+                        .set(userData)
+                        .addOnSuccessListener {
+                            Log.d(TAG, "Documento de usuario creado exitosamente")
+                        }
+                        .addOnFailureListener { e ->
+                            Log.e(TAG, "Error creando documento de usuario: ${e.message}", e)
+                        }
+                } else {
+                    Log.d(TAG, "Documento de usuario ya existe")
+                }
+            }
+            .addOnFailureListener { e ->
+                Log.e(TAG, "Error verificando documento de usuario: ${e.message}", e)
+            }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
