@@ -20,4 +20,8 @@
     <color name="gray_dark">#424242</color>
     <color name="error">#FF0000</color>
     <color name="success">#4CAF50</color>
+
+    <!-- Para el círculo de progreso -->
+    <color name="progress_background">#E0E0E0</color>
+    <color name="progress_foreground">#00FF9C</color>
 </resources>

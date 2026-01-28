@@ -5,32 +5,65 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp"
-    android:gravity="center">
+    android:gravity="center"
+    android:padding="24dp">
 
+    <!-- Email del usuario -->
     <TextView
         android:id="@+id/tvUserEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="32dp"
         android:text="Usuario"
         android:textSize="18sp"
         android:textStyle="bold"
-        tools:text="usuario@ejemplo.com" />
+        android:textColor="@color/primary_dark"
+        tools:text="rick@morty.com" />
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        app:cardCornerRadius="12dp"
-        app:cardElevation="4dp">
+        app:cardCornerRadius="16dp"
+        app:cardElevation="8dp"
+        app:cardBackgroundColor="@color/white">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:padding="24dp"
+            android:gravity="center">
 
+            <!-- Círculo de progreso -->
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp">
+
+                <com.google.android.material.progressindicator.CircularProgressIndicator
+                    android:id="@+id/circularProgress"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    app:indicatorColor="@color/primary_green"
+                    app:trackColor="@color/gray_light"
+                    app:trackThickness="12dp"
+                    app:indicatorSize="150dp"
+                    android:progress="0" />
+
+                <!-- Porcentaje -->
+                <TextView
+                    android:id="@+id/tvProgressPercentage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="0%"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/primary_dark" />
+
+            </RelativeLayout>
+
+            <!-- Estadísticas -->
             <TextView
                 android:id="@+id/tvTotalEpisodes"
                 android:layout_width="wrap_content"
@@ -38,45 +71,29 @@
                 android:layout_marginBottom="8dp"
                 android:text="Total episodios: 0"
                 android:textSize="16sp"
-                tools:text="Total episodios: 51" />
+                android:textColor="@color/primary_dark" />
 
             <TextView
                 android:id="@+id/tvSeenEpisodes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
+                android:layout_marginBottom="16dp"
                 android:text="Episodios vistos: 0"
                 android:textSize="16sp"
-                tools:text="Episodios vistos: 12" />
+                android:textColor="@color/primary_dark" />
 
+            <!-- Mensaje de progreso -->
             <TextView
-                android:id="@+id/tvPercentage"
+                android:id="@+id/tvProgressMessage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:text="Progreso: 0%"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                tools:text="Progreso: 23%" />
-
-            <ProgressBar
-                android:id="@+id/progressBar"
-                style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:max="100"
-                tools:progress="23" />
+                android:text="¡Sigue viendo episodios!"
+                android:textSize="14sp"
+                android:textColor="@color/gray"
+                android:textStyle="italic" />
 
         </LinearLayout>
-    </com.google.android.material.card.MaterialCardView>
 
-    <!-- AÑADE ESTE BOTÓN -->
-    <Button
-        android:id="@+id/btnRefresh"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Actualizar"
-        android:layout_marginTop="16dp" />
+    </com.google.android.material.card.MaterialCardView>
 
 </LinearLayout>

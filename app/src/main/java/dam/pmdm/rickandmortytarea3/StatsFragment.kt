@@ -7,19 +7,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.activityViewModels
 import com.google.firebase.auth.FirebaseAuth
 import dam.pmdm.rickandmortytarea3.databinding.FragmentStatsBinding
 import dam.pmdm.rickandmortytarea3.ui.episodes.EpisodesViewModel
-import dam.pmdm.rickandmortytarea3.ui.episodes.EpisodesViewModelFactory
 
 class StatsFragment : Fragment() {
 
     private var _binding: FragmentStatsBinding? = null
     private val binding get() = _binding!!
 
-
-    private lateinit var viewModel: EpisodesViewModel
+    private val viewModel: EpisodesViewModel by activityViewModels()
 
     companion object {
         private const val TAG = "StatsFragment"
@@ -37,12 +35,6 @@ class StatsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Inicializa ViewModel
-        viewModel = ViewModelProvider(
-            requireActivity(),
-            EpisodesViewModelFactory(requireActivity().application)
-        )[EpisodesViewModel::class.java]
-
         Log.d(TAG, "StatsFragment creado")
 
         // Email del usuario
@@ -51,20 +43,19 @@ class StatsFragment : Fragment() {
 
         setupObservers()
 
-
         viewModel.debugSeenEpisodes()
 
         viewModel.loadEpisodesIfNeeded()
     }
 
     private fun setupObservers() {
-        // Observa episodios vistos
+
         viewModel.seenEpisodes.observe(viewLifecycleOwner) { seenIds ->
             Log.d(TAG, "Episodios vistos actualizados (Stats): ${seenIds.size}")
             updateStats(seenIds.size)
         }
 
-        // Observa todos los episodios
+
         viewModel.episodes.observe(viewLifecycleOwner) { episodes ->
             Log.d(TAG, "Episodios actualizados (Stats): ${episodes.size}")
             if (episodes.isNotEmpty()) {
@@ -72,7 +63,6 @@ class StatsFragment : Fragment() {
             }
         }
 
-        // Observa errores
         viewModel.error.observe(viewLifecycleOwner) { error ->
             error?.let {
                 Log.e(TAG, "Error en ViewModel: $error")
@@ -88,18 +78,44 @@ class StatsFragment : Fragment() {
         binding.tvSeenEpisodes.text = "Episodios vistos: $seenCount"
 
         if (totalEpisodes > 0) {
+            // Calcula porcentaje (de 0 a 100)
             val percentage = (seenCount.toFloat() / totalEpisodes * 100).toInt()
-            binding.tvPercentage.text = "Progreso: $percentage%"
 
-            // Actualiza progress bar
-            binding.progressBar.max = totalEpisodes
-            binding.progressBar.progress = seenCount
+            // Actualiza el texto del porcentaje en el centro
+            binding.tvProgressPercentage.text = "$percentage%"
+
+            // Actualiza el progreso circular (0-100)
+            binding.circularProgress.progress = percentage
+
+            // Actualiza mensaje según el progreso
+            updateProgressMessage(percentage, seenCount, totalEpisodes)
 
             Log.d(TAG, "Estadísticas actualizadas: $seenCount/$totalEpisodes ($percentage%)")
         } else {
-            binding.tvPercentage.text = "Progreso: 0%"
-            binding.progressBar.max = 100
-            binding.progressBar.progress = 0
+            binding.tvProgressPercentage.text = "0%"
+            binding.circularProgress.progress = 0
+            binding.tvProgressMessage.text = "Cargando datos..."
+        }
+    }
+
+    private fun updateProgressMessage(percentage: Int, seenCount: Int, totalEpisodes: Int) {
+        val message = when {
+            percentage == 0 -> "¡Comienza a ver episodios!"
+            percentage < 25 -> "¡Sigue así!"
+            percentage < 50 -> "¡Vas por buen camino!"
+            percentage < 75 -> "¡Más de la mitad!"
+            percentage < 100 -> "¡Casi terminado!"
+            percentage == 100 -> "¡Completado! 🎉"
+            else -> "¡Sigue viendo episodios!"
+        }
+
+        binding.tvProgressMessage.text = message
+
+        // Si está completo, mostrar emoji de celebración
+        if (percentage == 100) {
+            binding.tvProgressMessage.setTextColor(requireContext().getColor(android.R.color.holo_green_dark))
+        } else {
+            binding.tvProgressMessage.setTextColor(requireContext().getColor(android.R.color.darker_gray))
         }
     }
 
