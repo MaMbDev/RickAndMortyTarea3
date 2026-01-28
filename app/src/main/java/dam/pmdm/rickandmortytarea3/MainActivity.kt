@@ -36,12 +36,7 @@ class MainActivity : BaseActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
-        val appPreferences = AppPreferences(this)
-        ThemeHelper.applyTheme(appPreferences.theme)
-
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
 
         auth = FirebaseAuth.getInstance()
 
@@ -51,6 +46,8 @@ class MainActivity : BaseActivity() {
             finish()
             return
         }
+
+        setContentView(R.layout.activity_main)
 
         // Asegura que el documento del usuario existe en Firestore
         ensureUserDocument()
@@ -64,7 +61,7 @@ class MainActivity : BaseActivity() {
         // Actualiza email en el header
         val headerView = navigationView.getHeaderView(0)
         val tvUserEmail = headerView.findViewById<TextView>(R.id.tvUserEmail)
-        tvUserEmail.text = auth.currentUser?.email ?: "Usuario"
+        tvUserEmail.text = auth.currentUser?.email ?: getString(R.string.user)
 
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
@@ -95,11 +92,26 @@ class MainActivity : BaseActivity() {
                 else -> false
             }
         }
+
+        // Observa cambios de destino para actualizar título
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            when (destination.id) {
+                R.id.episodesFragment -> {
+                    supportActionBar?.title = getString(R.string.episodes_title)
+                }
+                R.id.statsFragment -> {
+                    supportActionBar?.title = getString(R.string.stats_title)
+                }
+                R.id.settingsFragment -> {
+                    supportActionBar?.title = getString(R.string.settings_title)
+                }
+            }
+        }
     }
 
     private fun ensureUserDocument() {
         val userId = auth.currentUser?.uid ?: return
-        val userEmail = auth.currentUser?.email ?: "Usuario"
+        val userEmail = auth.currentUser?.email ?: getString(R.string.user)
 
         db.collection("users").document(userId).get()
             .addOnSuccessListener { document ->
@@ -144,20 +156,20 @@ class MainActivity : BaseActivity() {
 
     private fun showAboutDialog() {
         AlertDialog.Builder(this)
-            .setTitle("Acerca de")
-            .setMessage("Desarrollador: Miguel Ángel Marañón Buendía \nVersión: 1.0.0")
-            .setPositiveButton("Cerrar", null)
+            .setTitle(getString(R.string.about_title))
+            .setMessage(getString(R.string.about_message))
+            .setPositiveButton(getString(android.R.string.ok), null)
             .show()
     }
 
     private fun showLogoutDialog() {
         AlertDialog.Builder(this)
-            .setTitle("Cerrar Sesión")
-            .setMessage("¿Estás seguro de que quieres cerrar sesión?")
-            .setPositiveButton("Sí") { _, _ ->
+            .setTitle(getString(R.string.logout))
+            .setMessage(getString(R.string.logout_confirmation))
+            .setPositiveButton(getString(android.R.string.yes)) { _, _ ->
                 logout()
             }
-            .setNegativeButton("No", null)
+            .setNegativeButton(getString(android.R.string.no), null)
             .show()
     }
 

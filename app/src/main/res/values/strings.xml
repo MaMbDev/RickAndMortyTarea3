@@ -33,4 +33,21 @@
     <string name="changes_warning">Los cambios de idioma y tema requieren reiniciar la aplicación para aplicar completamente.</string>
     <string name="user">Usuario</string>
     <string name="loading_data">Cargando datos...</string>
+
+    <string name="episodes_title">Episodios</string>
+    <string name="stats_title">Estadísticas</string>
+    <string name="settings_title">Ajustes</string>
+    <string name="about_title">Acerca de</string>
+    <string name="progress_start">¡Comienza a ver episodios!</string>
+    <string name="progress_keep_going">¡Sigue así!</string>
+    <string name="progress_good_path">¡Vas por buen camino!</string>
+    <string name="progress_half">¡Más de la mitad!</string>
+    <string name="progress_almost">¡Casi terminado!</string>
+    <string name="progress_completed">¡Completado! 🎉</string>
+    <string name="progress_continue">¡Sigue viendo episodios!</string>
+    <string name="about_message">Desarrollador: Miguel Ángel Marañón Buendía\nVersión: 1.0.0</string>
+
+    <string name="logout_confirmation">¿Estás seguro de que quieres cerrar sesión?</string>
+
+
 </resources>

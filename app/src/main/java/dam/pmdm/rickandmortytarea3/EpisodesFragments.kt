@@ -81,7 +81,7 @@ class EpisodesFragment : Fragment() {
                 Log.d(TAG, "Click en episodio: ${episode.id} - ${episode.name}")
                 // Toggle visto/no visto al hacer click
                 viewModel.toggleEpisodeSeen(episode.id)
-                // Actualizar el adapter inmediatamente
+                // Actualiza el adapter inmediatamente
                 adapter.notifyDataSetChanged()
                 Toast.makeText(requireContext(),
                     "${episode.name} ${if (viewModel.isEpisodeSeen(episode.id)) "✓ VISTO" else "✗ NO VISTO"}",
@@ -103,7 +103,7 @@ class EpisodesFragment : Fragment() {
         viewModel.seenEpisodes.observe(viewLifecycleOwner) { seenIds ->
             Log.d(TAG, "Episodios vistos actualizados: ${seenIds.size}")
             Log.d(TAG, "Lista de vistos: $seenIds")
-            // Actualizar el adapter cuando cambian los episodios vistos
+            // Actualiza el adapter cuando cambian los episodios vistos
             adapter.notifyDataSetChanged()
             // También actualizar el filtro
             if (showingSeenOnly) {

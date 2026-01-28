@@ -73,7 +73,7 @@ class SettingsFragment : Fragment() {
                     appPreferences.language = newLanguage
                     Toast.makeText(
                         requireContext(),
-                        "Idioma cambiado a: ${ThemeHelper.getCurrentLanguageName(newLanguage)}",
+                        "Idioma cambiado a: ${ThemeHelper.getCurrentLanguageName(requireContext(), newLanguage)}",
                         Toast.LENGTH_SHORT
                     ).show()
 
@@ -121,7 +121,7 @@ class SettingsFragment : Fragment() {
                     appPreferences.theme = newTheme
                     Toast.makeText(
                         requireContext(),
-                        "Tema cambiado a: ${ThemeHelper.getCurrentThemeName(newTheme)}",
+                        "Tema cambiado a: ${ThemeHelper.getCurrentThemeName(requireContext(), newTheme)}",
                         Toast.LENGTH_SHORT
                     ).show()
 
@@ -146,11 +146,11 @@ class SettingsFragment : Fragment() {
         val userEmail = FirebaseAuth.getInstance().currentUser?.email ?: getString(R.string.user)
 
         binding.tvCurrentSettings.text = """
-        ${getString(R.string.current_settings)}:
-        • ${getString(R.string.language)}: ${ThemeHelper.getCurrentLanguageName(appPreferences.language)}
-        • ${getString(R.string.theme)}: ${ThemeHelper.getCurrentThemeName(appPreferences.theme)}
-        • ${getString(R.string.user)}: $userEmail
-    """.trimIndent()
+      ${getString(R.string.current_settings)}:
+    • ${getString(R.string.language)}: ${ThemeHelper.getCurrentLanguageName(requireContext(), appPreferences.language)}
+    • ${getString(R.string.theme)}: ${ThemeHelper.getCurrentThemeName(requireContext(), appPreferences.theme)}
+    • ${getString(R.string.user)}: $userEmail
+""".trimIndent()
     }
     private fun restartApp() {
         //  cambio de idioma inmediatamente

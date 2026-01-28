@@ -34,4 +34,20 @@
     <string name="changes_warning">Language and theme changes require restarting the app to fully apply.</string>
     <string name="user">User</string>
     <string name="loading_data">Loading data...</string>
+
+    <string name="episodes_title">Episodes</string>
+    <string name="stats_title">Statistics</string>
+    <string name="settings_title">Settings</string>
+    <string name="about_title">About</string>
+    <string name="progress_start">Start watching episodes!</string>
+    <string name="progress_keep_going">Keep going!</string>
+    <string name="progress_good_path">You\'re on the right track!</string>
+    <string name="progress_half">More than half!</string>
+    <string name="progress_almost">Almost done!</string>
+    <string name="progress_completed">Completed! 🎉</string>
+    <string name="progress_continue">Keep watching episodes!</string>
+    <string name="about_message">Developer: Miguel Ángel Marañón Buendía\nVersion: 1.0.0</string>
+
+    <string name="logout_confirmation">Are you sure you want to log out?</string>
+
 </resources>

@@ -6,6 +6,7 @@ import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatDelegate
 import dam.pmdm.rickandmortytarea3.data.preferences.AppPreferences
 import java.util.*
+import dam.pmdm.rickandmortytarea3.R
 
 object ThemeHelper {
 
@@ -26,7 +27,7 @@ object ThemeHelper {
     fun applyLanguage(context: Context, language: String) {
         val locale = when (language) {
             AppPreferences.LANGUAGE_ENGLISH -> Locale.ENGLISH
-            else -> Locale("es", "ES")  // Español
+            else -> Locale("es", "ES")
         }
 
         Locale.setDefault(locale)
@@ -35,24 +36,20 @@ object ThemeHelper {
         context.resources.updateConfiguration(config, context.resources.displayMetrics)
     }
 
-    fun restartActivity(activity: Activity) {
-        activity.recreate()
-    }
-
-    fun getCurrentLanguageName(language: String): String {
+    fun getCurrentLanguageName(context: Context, language: String): String {
         return when (language) {
-            AppPreferences.LANGUAGE_SPANISH -> "Español"
-            AppPreferences.LANGUAGE_ENGLISH -> "English"
-            else -> "Español"
+            AppPreferences.LANGUAGE_SPANISH -> context.getString(R.string.spanish)
+            AppPreferences.LANGUAGE_ENGLISH -> context.getString(R.string.english)
+            else -> context.getString(R.string.spanish)
         }
     }
 
-    fun getCurrentThemeName(theme: String): String {
+    fun getCurrentThemeName(context: Context, theme: String): String {
         return when (theme) {
-            AppPreferences.THEME_LIGHT -> "Claro"
-            AppPreferences.THEME_DARK -> "Oscuro"
-            AppPreferences.THEME_SYSTEM -> "Sistema"
-            else -> "Claro"
+            AppPreferences.THEME_LIGHT -> context.getString(R.string.light)
+            AppPreferences.THEME_DARK -> context.getString(R.string.dark)
+            AppPreferences.THEME_SYSTEM -> context.getString(R.string.system)
+            else -> context.getString(R.string.light)
         }
     }
 }

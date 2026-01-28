@@ -91,18 +91,18 @@ class StatsFragment : Fragment() {
 
     private fun updateProgressMessage(percentage: Int, seenCount: Int, totalEpisodes: Int) {
         val message = when {
-            percentage == 0 -> "¡Comienza a ver episodios!"
-            percentage < 25 -> "¡Sigue así!"
-            percentage < 50 -> "¡Vas por buen camino!"
-            percentage < 75 -> "¡Más de la mitad!"
-            percentage < 100 -> "¡Casi terminado!"
-            percentage == 100 -> "¡Completado! 🎉"
-            else -> "¡Sigue viendo episodios!"
+            percentage == 0 -> getString(R.string.progress_start)
+            percentage < 25 -> getString(R.string.progress_keep_going)
+            percentage < 50 -> getString(R.string.progress_good_path)
+            percentage < 75 -> getString(R.string.progress_half)
+            percentage < 100 -> getString(R.string.progress_almost)
+            percentage == 100 -> getString(R.string.progress_completed)
+            else -> getString(R.string.progress_continue)
         }
 
         binding.tvProgressMessage.text = message
 
-        // Si está completo, mostrar emoji de celebración
+        // Si está completo, muestra emoji de celebración
         if (percentage == 100) {
             binding.tvProgressMessage.setTextColor(requireContext().getColor(android.R.color.holo_green_dark))
         } else {
